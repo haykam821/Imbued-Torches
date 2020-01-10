@@ -21,7 +21,19 @@ public abstract class TorchBlockMixin {
 	public ActionResult onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		// Do not apply to torches that already have redstone
 		if (blockState.getBlock() instanceof RedstoneTorchBlock) return ActionResult.PASS;
-		if (!(playerEntity.getMainHandStack().getItem() == Items.REDSTONE || playerEntity.getOffHandStack().getItem() == Items.REDSTONE)) return ActionResult.PASS;
+
+		// Remove one redstone dust from the non-creative player's hand, if they have any
+		if (playerEntity.getMainHandStack().getItem() == Items.REDSTONE) {
+			if (!playerEntity.isCreative()) {
+				playerEntity.getMainHandStack().decrement(1);
+			}
+		} else if (playerEntity.getOffHandStack().getItem() == Items.REDSTONE) {
+			if (!playerEntity.isCreative()) {
+				playerEntity.getOffHandStack().decrement(1);
+			}
+		} else {
+			return ActionResult.PASS;
+		}
 		
 		if (blockState.contains(Properties.HORIZONTAL_FACING)) {
 			Direction facing = blockState.get(Properties.HORIZONTAL_FACING);
