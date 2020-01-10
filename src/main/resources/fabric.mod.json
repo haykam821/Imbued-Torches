@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "imbuedtorches",
+	"version": "${version}",
+
+	"name": "Imbued Torches",
+	"description": "Makes obtaining redstone torches more realistic.",
+	"authors": [
+		"haykam821"
+	],
+	"contact": {
+		"homepage": "https://github.com/haykam821/Imbued Torches#readme",
+		"issues": "https://github.com/haykam821/Imbued Torches/issues"
+	},
+
+	"license": "MIT",
+	"icon": "assets/imbuedtorches/icon.png",
+
+	"environment": "*",
+	"mixins": [
+		"imbuedtorches.mixins.json"
+	],
+
+	"depends": {
+		"fabricloader": ">=0.4.0"
+	}
+}

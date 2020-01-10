@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "io.github.haykam821.imbuedtorches.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [],
+	"client": [
+		"TorchBlockMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
