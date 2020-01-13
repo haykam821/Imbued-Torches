@@ -6,6 +6,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneTorchBlock;
@@ -17,7 +18,11 @@ import net.minecraft.state.property.Properties;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(TorchBlock.class)
-public abstract class TorchBlockMixin {
+public abstract class TorchBlockMixin extends Block {
+	public TorchBlockMixin(Settings settings) {
+		super(settings);
+	}
+
 	public ActionResult onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		// Do not apply to torches that already have redstone
 		if (blockState.getBlock() instanceof RedstoneTorchBlock) return ActionResult.PASS;
@@ -46,6 +51,7 @@ public abstract class TorchBlockMixin {
 			BlockState redstoneState = Blocks.REDSTONE_TORCH.getDefaultState();
 			TorchBlock.replaceBlock(blockState, redstoneState, world, blockPos, 0);
 		}
+		world.updateNeighbors(blockPos, this);
 		
 		return ActionResult.SUCCESS;
 	}
