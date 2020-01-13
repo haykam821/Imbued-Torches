@@ -4,7 +4,7 @@
 	"version": "${version}",
 
 	"name": "Imbued Torches",
-	"description": "Makes obtaining redstone torches more realistic.",
+	"description": "Allows applying redstone dust to a torch to make it a redstone torch.",
 	"authors": [
 		"haykam821"
 	],
