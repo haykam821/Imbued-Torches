@@ -27,8 +27,8 @@ public abstract class TorchBlockMixin extends Block {
 	public ActionResult onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		// Do not apply to torches that already have redstone or are soul torches
 		if (blockState.getBlock() instanceof RedstoneTorchBlock) return ActionResult.PASS;
-		if (blockState.getBlock() == Blocks.SOUL_FIRE_TORCH) return ActionResult.PASS;
-		if (blockState.getBlock() == Blocks.SOUL_FIRE_WALL_TORCH) return ActionResult.PASS;
+		if (blockState.getBlock() == Blocks.SOUL_TORCH) return ActionResult.PASS;
+		if (blockState.getBlock() == Blocks.SOUL_WALL_TORCH) return ActionResult.PASS;
 
 		// Remove one redstone dust from the non-creative player's hand, if they have any
 		ItemStack handStack = playerEntity.getStackInHand(hand);
@@ -44,12 +44,12 @@ public abstract class TorchBlockMixin extends Block {
 		if (blockState.contains(Properties.HORIZONTAL_FACING)) {
 			Direction facing = blockState.get(Properties.HORIZONTAL_FACING);
 			
-			BlockState wallRedstoneState = (isRedstone ? Blocks.REDSTONE_WALL_TORCH : Blocks.SOUL_FIRE_WALL_TORCH).getDefaultState();
+			BlockState wallRedstoneState = (isRedstone ? Blocks.REDSTONE_WALL_TORCH : Blocks.SOUL_WALL_TORCH).getDefaultState();
 			BlockState directionState = wallRedstoneState.with(Properties.HORIZONTAL_FACING, facing);
 
 			TorchBlock.replaceBlock(blockState, directionState, world, blockPos, 0);
 		} else {
-			BlockState redstoneState = (isRedstone ? Blocks.REDSTONE_WALL_TORCH : Blocks.SOUL_FIRE_TORCH).getDefaultState();
+			BlockState redstoneState = (isRedstone ? Blocks.REDSTONE_WALL_TORCH : Blocks.SOUL_TORCH).getDefaultState();
 			TorchBlock.replaceBlock(blockState, redstoneState, world, blockPos, 0);
 		}
 		world.updateNeighbors(blockPos, this);
